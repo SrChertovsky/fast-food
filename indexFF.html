@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Restaurant - Premium Quality Burgers</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #FF6B00;
+            color: rgb(255, 255, 255);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #e05e00;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            color: rgb(255, 255, 255);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #FF6B00;
+        }
+
+        .nav-links li:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        .order-btn-container {
+            margin-left: auto;
+        }
+
+        .order-btn {
+            background-color: #FF6B00;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            margin-left: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #e05e00;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #f8f8f8;
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://psv4.userapi.com/s/v1/d/9Du1pP-zMYf1qLRxGXRNzJ1tNTf-9eDOd4II3B_4qzrLCxr58MMQEsCUvKqY9bDSGRZOAaTKhVjfGHNlWqjy-MTp3p6zYRHUK6NOBwp1TJIyrpPFqP2xjw/welcome-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 80px 0 0 120px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero h4 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #eee;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background-color: #1c1c1c;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #FF6B00;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .menu-item {
+            flex: 0 0 calc(33.333% - 30px);
+            margin: 0 15px;
+            background: #312F30;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            min-width: 300px;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item-content {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .menu-item h3 {
+            font-size: 22px;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .menu-item p {
+            color: #FFFFFF;
+            margin: 15px 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 107, 0, 0.7);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(255, 107, 0, 1);
+        }
+
+        .carousel-prev {
+            left: 0;
+        }
+
+        .carousel-next {
+            right: 0;
+        }
+
+        /* Burger Block Styles */
+        .burger-block {
+            background-color: #312F30;
+            color: white;
+            padding: 80px 0;
+        }
+
+        .burger-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .burger-content img {
+            max-width: 45%;
+            margin-right: 40px;
+        }
+
+        .burger-text-content {
+            flex: 1;
+        }
+
+        .burger-block h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .burger-block p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .burger-price {
+            margin: 30px 0;
+            font-size: 24px;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 15px;
+        }
+
+        .price-new {
+            font-weight: bold;
+            font-size: 32px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* ========================================= */
+        /* Адаптация для различных разрешений экрана */
+        /* ========================================= */
+
+        /* HD 1280×720 (16:9) */
+        @media (max-width: 1280px) {
+            .hero {
+                padding: 80px 0 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .menu-item {
+                flex: 0 0 calc(33.333% - 20px);
+                min-width: 280px;
+            }
+            
+            .burger-content {
+                gap: 40px;
+            }
+        }
+
+        /* WXGA 1366×768 (16:9) */
+        @media (max-width: 1366px) {
+            .hero h1 {
+                font-size: 44px;
+            }
+            
+            .section-title {
+                font-size: 34px;
+            }
+            
+            .burger-block h2 {
+                font-size: 34px;
+            }
+        }
+
+        /* Full HD 1920×1080 (16:9) - базовые стили уже подходят */
+        
+        /* WQHD 2560×1440 (16:9) */
+        @media (min-width: 1921px) and (max-width: 2560px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero h1 {
+                font-size: 56px;
+            }
+            
+            .hero p {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 42px;
+            }
+            
+            .menu-item h3 {
+                font-size: 26px;
+            }
+            
+            .burger-block h2 {
+                font-size: 42px;
+            }
+            
+            .burger-block p {
+                font-size: 20px;
+            }
+        }
+
+        /* UWQHD 3100×1440 (21:9) */
+        @media (min-width: 2561px) and (max-width: 3100px) {
+            .container {
+                max-width: 1600px;
+            }
+            
+            .hero h1 {
+                font-size: 60px;
+            }
+            
+            .hero p {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 46px;
+            }
+            
+            .menu-item {
+                flex: 0 0 calc(25% - 30px);
+            }
+            
+            .burger-content img {
+                max-width: 40%;
+            }
+        }
+
+        /* 4K UHD 3840×2160 (16:9) */
+        @media (min-width: 3101px) and (max-width: 3840px) {
+            .container {
+                max-width: 1800px;
+            }
+            
+            .hero h1 {
+                font-size: 72px;
+            }
+            
+            .hero p {
+                font-size: 26px;
+            }
+            
+            .section-title {
+                font-size: 52px;
+            }
+            
+            .menu-item {
+                flex: 0 0 calc(20% - 30px);
+            }
+            
+            .btn {
+                padding: 16px 40px;
+                font-size: 18px;
+            }
+            
+            .burger-content {
+                max-width: 1400px;
+            }
+        }
+
+        /* 8K UHD 7680×4320 (16:9) */
+        @media (min-width: 3841px) {
+            .container {
+                max-width: 2400px;
+            }
+            
+            .hero h1 {
+                font-size: 96px;
+            }
+            
+            .hero p {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 64px;
+            }
+            
+            .menu-item {
+                flex: 0 0 calc(16.666% - 30px);
+            }
+            
+            .btn {
+                padding: 20px 50px;
+                font-size: 22px;
+            }
+            
+            .burger-content {
+                max-width: 1800px;
+            }
+            
+            .burger-block h2 {
+                font-size: 56px;
+            }
+            
+            .burger-block p {
+                font-size: 28px;
+            }
+        }
+
+        /* Мобильные устройства и планшеты */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: all 0.5s ease;
+                transform: none;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero {
+                padding: 80px 0 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .menu-item {
+                flex: 0 0 calc(50% - 30px);
+                min-width: 250px;
+            }
+            
+            .order-btn-container {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 80vh;
+                text-align: center;
+                padding: 80px 20px 0;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .carousel-wrapper {
+                padding: 0 40px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .menu-item {
+                flex: 0 0 calc(100% - 30px);
+            }
+            
+            .burger-block {
+                padding: 60px 20px;
+            }
+            
+            .burger-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .burger-content img {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .burger-block h2 {
+                font-size: 30px;
+            }
+        }
+
+        /* Special Offers Section */
+.special-offers {
+    padding: 80px 0;
+    background-color: #1c1c1c;
+}
+
+.offer-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.offer-banner {
+    flex: 1;
+    min-height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s ease;
+}
+
+.offer-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    color: white;
+}
+
+.offer-banner h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.offer-banner p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.offer-price {
+    margin: 15px 0;
+}
+
+.old-price {
+    text-decoration: line-through;
+    opacity: 0.7;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.new-price {
+    font-weight: bold;
+    font-size: 24px;
+    color: #FF6B00;
+}
+
+.offer-btn {
+    display: inline-block;
+    background-color: #FF6B00;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.offer-btn:hover {
+    background-color: #e05e00;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .offer-row {
+        flex-direction: column;
+    }
+    
+    .offer-banner {
+        min-height: 250px;
+    }
+}
+
+/*adele*/
+.testimonials {
+    background-color: #171717;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+}
+
+.testimonials-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.testimonials-img img {
+    width: 320px;
+    max-width: 100%;
+    height: auto;
+}
+
+.testimonials-text {
+    max-width: 600px;
+    position: relative;
+    padding: 0 20px;
+}
+
+.quote-mark {
+    font-size: 100px;
+    color: #FF6B00;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.quote-content {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+.quote-author {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.quote-country {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .testimonials-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 60px;
+        text-align: left;
+    }
+
+    .testimonials-text {
+        text-align: center;
+    }
+
+    .quote-mark {
+        text-align: center;
+    }
+}
+
+        /* Download Menu */
+        .download-menu {
+            padding: 80px 0;
+            background-color: #312F30;
+            color: white;
+        }
+
+        .download-menu .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px; /* Уменьшил отступ между элементами */
+            max-width: 1000px; /* Ограничил максимальную ширину для лучшего вида */
+            margin: 0 auto;
+        }
+
+        .download-menu h2 {
+            font-size: 36px;
+            margin-bottom: 0;
+            white-space: nowrap; /* Запрещаем перенос текста */
+        }
+
+        .btn-download {
+            padding: 15px 50px;
+            font-size: 18px;
+            white-space: nowrap; /* Запрещаем перенос текста на кнопке */
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 768px) {
+            .download-menu .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px; /* Уменьшил отступ для мобильных */
+            }
+            
+            .download-menu h2 {
+                margin-bottom: 0;
+                white-space: normal; /* Разрешаем перенос текста на мобильных */
+            }
+        }
+
+/* Footer */
+footer {
+    background-color: #1C1C1C;
+    color: white;
+    padding: 80px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-logo {
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.contact-info li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-col h3 {
+    font-size: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #F6762C;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: #F6762C;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #F6762C;
+}
+    </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav id="navbar">
+    <div class="container nav-container">
+        <a href="#" class="logo"><img src="https://psv4.userapi.com/s/v1/d/tggomKTnEfJZOMbevxnf3-tXvfjiRFrYM3k_X5otQWH_uBVN_YP0hwUXYfC9tYIHvdzdT7z9WXZGEsqeEcwH3n7BeYgfmbKVFbQwJnzoRIDpIBL2tgKk4Q/logo.png"></a>
+        
+        <div class="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Car offer</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Shop</a></li>
+        </ul>
+        <div class="order-btn-container">
+            <a href="#" class="order-btn" style="text-decoration: none;">Order now</a>
+        </div>
+    </div>
+</nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h4>Fast Food Burgers</h4>
+            <h1>The fastest food, for instant hunger.</h1>
+            <p>Some food has looked so awful that it's looked like something that the dog's brought home, yet after one mouthful I've been left eating my thoughts, my words & my food and gone back for seconds.</p>
+            <a href="#" class="btn">ORDER NOW</a>
+        </div>
+    </section>
+    
+    <!-- Menu Section with Carousel -->
+    <section class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Our Special Offers</h2>
+            
+            <div class="carousel-wrapper">
+                <button class="carousel-btn carousel-prev" id="prevBtn">&#10094;</button>
+                
+                <div class="carousel-container">
+                    <div class="carousel" id="carousel">
+                        <div class="menu-item">
+                            <img src="https://psv4.userapi.com/s/v1/d/5dpW7kZ6iozErGO-4yL7DAviWFxBa9yfWjQE_hLo9HczmQLU72jBqgfGwFI3dfbPYxDcnu1_xGxM9NDGeP2Of_C5MnG__C8deVKqnQryY0naqEzDVePX8w/food-list-1.jpg" alt="Chicken Poetle">
+                            <div class="menu-item-content">
+                                <h3>Chicken Paella</h3>
+                                <p>We just don't make and sell food. Good food warms.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="https://psv4.userapi.com/s/v1/d/0wZpwqssBOZ-KZ6JvIxvZJlrkAerJWV3AZpSimt_W8O1CK0PGyyMIOndEunUqcFBg8adUXOdh0c4FlydKBRyrpnKTcbqhuBUN22FKN4VTR0X6RBoW9T4EQ/food-list-2.jpg" alt="Taco Del Mar">
+                            <div class="menu-item-content">
+                                <h3>Taco Del Mar</h3>
+                                <p>Taco Del Mar brings the best out of Mexican cuisine with fresh.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="https://psv4.userapi.com/s/v1/d/uz30lTN6We2ro3D-ouGnzv6SXEyYsSxyq6D_C0t2q5lucmDe-m1wrCNnzVhejRnn9A0S1U7P0qi_OLsW3BndckB4E33lJaCHJWfsJ32aC1CQGhYY7Q20Ew/food-list-3.jpg" alt="Bon Au Pain">
+                            <div class="menu-item-content">
+                                <h3>Bon Au Pain</h3>
+                                <p>Bon Au Pain is a pioneer in the healthy fast food scene.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="https://psv4.userapi.com/s/v1/d/C4gJsuF3QAE6vXtTOXrjiMQToojHPJaiyRXowDeqKER_e9pSK_n7EkGEiHEMr6L_DHgj4-q6fSLoo4s9lgz2_NY7bjjknCZj4SF-oKYpx_PXK9dKJsfHAA/food-list-4.jpg" alt="Pizza Hut">
+                            <div class="menu-item-content">
+                                <h3>Pizza Hut</h3>
+                                <p>Although the Pizza Hut Menu Prices have tumbled over the years.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Burger Special">
+                            <div class="menu-item-content">
+                                <h3>Burger Special</h3>
+                                <p>Our signature burger with special sauce and fresh ingredients.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-btn carousel-next" id="nextBtn">&#10095;</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Burger King Section -->
+    <section class="burger-block">
+        <div class="container">
+            <div class="burger-content">
+                <img src="https://psv4.userapi.com/s/v1/d/NbYoCtGsKCpR-LcBmYFJaj62oPXaupd7Syg7kAdyrV-vRG0bgwFWkhstfLIbD2to0QqsV1Mz2yTRW6oAEkK0aRbJFNtMmhb9GLfPecDZF2NwIj2lB2jUJg/burger.png">
+                <div class="burger-text-content">
+                    <h2>Burger King</h2>
+                    <p>Together with McDonald's, Burger King has grown to become synonymous with burgers in the US.</p>
+                    <div class="burger-price">
+                        <span class="price-old">$8</span>
+                        <span class="price-new">$6</span>
+                    </div>
+                    <a href="#" class="btn">ORDER NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+<section class="special-offers">
+    <div class="container">
+        <div class="offers-grid">
+            <!-- Row 1 -->
+            <div class="offer-row">
+                <!-- Dairy Queen -->
+                <div class="offer-banner" style="background-image: url('https://psv4.userapi.com/s/v1/d/Fy1eQN0wszQ24N3grjPtDSdLG91PyFuaZy1L-ltQB7q262Jph9gOOHSO-xpOaDWgOFR4BfchQjyfw-1pwSNKFe2dJlkVQ8XaRehcmzdHY-igN8pMjNshhw/product-1.jpg');">
+                    <div class="offer-content">
+                        <h3>Dairy Queen</h3>
+                        <p>Dairy Queen is one of the biggest fast-food.</p>
+                        <div class="offer-price">
+                            <span class="old-price">$4</span>
+                            <span class="new-price">$6</span>
+                        </div>
+                        <a href="#" class="offer-btn">Order now</a>
+                    </div>
+                </div>
+                
+                <!-- Pizza Hut -->
+                <div class="offer-banner" style="background-image: url('https://psv4.userapi.com/s/v1/d/g8lW8s2w07kYLfG17y9vKXKJSfy_Hqvxv5KMToEjKU4cnRtgDNpq1xd-L2a_H5e7rHbgErDJy9aI7RYSc04mek5HBXP4aewsmXW1-ihhDzD-Vbo_PdrqJw/product-2.jpg');">
+                    <div class="offer-content">
+                        <h3>Pizza Hut</h3>
+                        <p>Although the Pizza Hut Menu Prices.</p>
+                        <div class="offer-price">
+                            <span class="old-price">$3</span>
+                            <span class="new-price">$7</span>
+                        </div>
+                        <a href="#" class="offer-btn">Order now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="offer-row">
+                <!-- Burger King -->
+                <div class="offer-banner" style="background-image: url('https://psv4.userapi.com/s/v1/d/ywVvsuNOKMXLagRkO1RgV6gWRXNukjH01Cz2B8hRCPXrLB2qNPmGFmqw5AxdyFzqhNOBGdyejHZakMj8wjaPHgL640zbcfBso6ZA2wtEARGEC5UQvbJ3Mw/product-3.jpg');">
+                    <div class="offer-content">
+                        <h3>Burger King</h3>
+                        <p>Together with McDonald's, Burger King.</p>
+                        <div class="offer-price">
+                            <span class="old-price">$5</span>
+                            <span class="new-price">$6</span>
+                        </div>
+                        <a href="#" class="offer-btn">Order now</a>
+                    </div>
+                </div>
+                
+                <!-- Papa Johns -->
+                <div class="offer-banner" style="background-image: url('https://psv4.userapi.com/s/v1/d/Q7K3l4yaF_8lvzI3nCYYgxIuxBqsFZCSYQLAtnX1orjbFdrgUGbv9ExcAoPqAHD9Ahyt0IelPhRcB9qvSO0ciqKvsHfD5lvKk5hfsc59vn3dlTdFT5gKwg/product-4.jpg');">
+                    <div class="offer-content">
+                        <h3>Papa John's</h3>
+                        <p>Papa John's is one of the most popular fast-food.</p>
+                        <div class="offer-price">
+                            <span class="old-price">$6</span>
+                            <span class="new-price">$8</span>
+                        </div>
+                        <a href="#" class="offer-btn">Order now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <div class="testimonials-inner">
+            <div class="testimonials-img">
+                <img src="https://psv4.userapi.com/s/v1/d/7xiFbibpPC3ebKkE-o-uvkKS2Sl82D5h6wTQZtwXyTSUAEVxk-1bLj5jxTqifW2MU68Mxgw-ssYQJ2qbOJxxFaBn2eeBpleey-WVsHsNb4q52uIrdirEgg/feedback.png" alt="Testimonial Image">
+            </div>
+            <div class="testimonials-text">
+                <div class="quote-mark">“</div>
+                <p class="quote-content">
+                    Thanks a lot for the prompt service. Really appreciate. <br>
+                    Excellence taste in Every Bite. Add a joy of best Taste. <br>
+                    Foodie Moments.
+                </p>
+                <h4 class="quote-author">Adele A. McNeill</h4>
+                <span class="quote-country">AMERICAN</span>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Download Menu -->
+    <section class="download-menu">
+        <div class="container">
+            <h2>Download Our Menu</h2>
+            <a href="#" class="btn btn-download">DOWNLOAD</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <img src="/img/fast-food-logo-design-vector_18099-221-removebg-preview 2.png" alt="Burger House Logo" class="footer-logo">
+                    <ul class="contact-info">
+                        <li><i class="icon-email"></i> fastfood@example.com</li>
+                        <li><i class="icon-website"></i> www.fastfood.example.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Menu</h3>
+                    <ul>
+                        <li><a href="#">Breakfast</a></li>
+                        <li><a href="#">Lunch</a></li>
+                        <li><a href="#">Dinner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Testimonial</a></li>
+                        <li><a href="#">Event</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Social Handles</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="icon-facebook"></i></a>
+                        <a href="#"><i class="icon-twitter"></i></a>
+                        <a href="#"><i class="icon-instagram"></i></a>
+                        <a href="#"><i class="icon-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links li a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Improved Carousel functionality
+        const carousel = document.getElementById('carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const items = document.querySelectorAll('.menu-item');
+        const itemWidth = items[0].offsetWidth + 30; // width + margin
+        let currentPosition = 0;
+        let maxVisibleItems = 3;
+        let autoScrollInterval;
+
+        // Calculate max position based on screen width
+        function calculateMaxPosition() {
+            if (window.innerWidth <= 768) {
+                maxVisibleItems = 1;
+            } else if (window.innerWidth <= 992) {
+                maxVisibleItems = 2;
+            } else {
+                maxVisibleItems = 3;
+            }
+            return -(itemWidth * (items.length - maxVisibleItems));
+        }
+
+        let maxPosition = calculateMaxPosition();
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(${currentPosition}px)`;
+        }
+
+        function moveCarousel(direction) {
+            currentPosition += direction * itemWidth * maxVisibleItems;
+            
+            // Check boundaries
+            if (currentPosition > 0) {
+                currentPosition = 0;
+            } else if (currentPosition < maxPosition) {
+                currentPosition = maxPosition;
+            }
+            
+            updateCarousel();
+            resetAutoScroll();
+        }
+
+        function resetAutoScroll() {
+            clearInterval(autoScrollInterval);
+            startAutoScroll();
+        }
+
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                if (currentPosition <= maxPosition) {
+                    currentPosition = 0;
+                } else {
+                    currentPosition -= itemWidth * maxVisibleItems;
+                }
+                updateCarousel();
+            }, 4000);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => moveCarousel(1));
+        nextBtn.addEventListener('click', () => moveCarousel(-1));
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            maxPosition = calculateMaxPosition();
+            // Reset position if current is beyond new max
+            if (currentPosition < maxPosition) {
+                currentPosition = maxPosition;
+                updateCarousel();
+            }
+        });
+
+        // Pause auto-scroll on hover
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollInterval);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            startAutoScroll();
+        });
+
+        // Initialize
+        startAutoScroll();
+
+        const offerBanners = document.querySelectorAll('.offer-banner');
+if (offerBanners.length > 0) {
+    offerBanners.forEach(banner => {
+        banner.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.03)';
+            this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+        });
+        
+        banner.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    });
+}
+    </script>
+</body>
+</html>
